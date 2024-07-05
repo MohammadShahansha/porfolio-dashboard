@@ -1,39 +1,39 @@
 import { baseApi } from "../baseApi";
 
-const skillApi = baseApi.injectEndpoints({
+const blogApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    createSkill: build.mutation({
+    createBlog: build.mutation({
       query: (data) => ({
-        url: "/skill",
+        url: "/blog",
         method: "POST",
         contentType: "application/json",
         data,
       }),
-      invalidatesTags: ["skill"],
+      invalidatesTags: ["blog"],
     }),
 
-    getAllSkill: build.query({
+    getAllBlog: build.query({
       query: () => ({
-        url: "/skills",
+        url: "/blogs",
         method: "GET",
       }),
-      providesTags: ["skill"],
+      providesTags: ["blog"],
     }),
 
-    deleteSkill: build.mutation({
+    deleteBlog: build.mutation({
       query: (_id) => ({
-        url: `/delete-skill/${_id}`,
+        url: `/delete-blog/${_id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["skill"],
+      invalidatesTags: ["blog"],
     }),
-    updateSkill: build.mutation({
+    updateBlog: build.mutation({
       query: (arg) => ({
-        url: `/update-skill/${arg?._id}`,
+        url: `/update-blog/${arg?._id}`,
         method: "PUT",
         data: arg,
       }),
-      invalidatesTags: ["skill"],
+      invalidatesTags: ["blog"],
     }),
     // getSinglePets: build.query({
     //   query: (arg) => ({
@@ -53,8 +53,8 @@ const skillApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useCreateSkillMutation,
-  useGetAllSkillQuery,
-  useDeleteSkillMutation,
-  useUpdateSkillMutation,
-} = skillApi;
+  useCreateBlogMutation,
+  useGetAllBlogQuery,
+  useUpdateBlogMutation,
+  useDeleteBlogMutation,
+} = blogApi;

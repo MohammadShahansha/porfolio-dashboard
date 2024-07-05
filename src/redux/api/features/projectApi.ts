@@ -20,21 +20,21 @@ const projectApi = baseApi.injectEndpoints({
       providesTags: ["project"],
     }),
 
-    // deletePet: build.mutation({
-    //   query: (id) => ({
-    //     url: `/pets/${id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["pets"],
-    // }),
-    // updatePet: build.mutation({
-    //   query: (arg) => ({
-    //     url: `/pets/${arg?.id}`,
-    //     method: "PUT",
-    //     data: arg,
-    //   }),
-    //   invalidatesTags: ["pets"],
-    // }),
+    deleteProject: build.mutation({
+      query: (_id) => ({
+        url: `/delete-project/${_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["project"],
+    }),
+    updateProject: build.mutation({
+      query: (arg) => ({
+        url: `/update-project/${arg?._id}`,
+        method: "PUT",
+        data: arg,
+      }),
+      invalidatesTags: ["project"],
+    }),
     // getSinglePets: build.query({
     //   query: (arg) => ({
     //     url: `/pets/${arg?.id}`,
@@ -52,4 +52,9 @@ const projectApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateProjectMutation, useGetAllProjectQuery } = projectApi;
+export const {
+  useCreateProjectMutation,
+  useGetAllProjectQuery,
+  useDeleteProjectMutation,
+  useUpdateProjectMutation,
+} = projectApi;

@@ -25,21 +25,29 @@ axios.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    const responseObject = {
-      data: response?.data?.data,
-      meta: response?.data?.meta,
-    };
-    return responseObject;
+
+    // const responseObject = {
+    //   data: response?.data?.data,
+    //   meta: response?.data?.meta,
+    // };
+    // console.log(responseObject);
+    return response;
   },
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    const responseObject = {
+
+    // const responseObject = {
+    //   statusCode: error?.response?.data?.statusCode || 500,
+    //   message: error?.response?.data?.message || "somthing went wrong",
+    //   errorMessage: error?.response?.data?.message,
+    // };
+    // return responseObject;
+
+    return Promise.reject({
       statusCode: error?.response?.data?.statusCode || 500,
-      message: error?.response?.data?.message || "somthing went wrong",
-      errorMessage: error?.response?.data?.message,
-    };
-    return responseObject;
+      message: error?.response?.data?.message || "Something went wrong",
+    });
   }
 );
 
