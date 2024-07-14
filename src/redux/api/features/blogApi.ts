@@ -31,6 +31,7 @@ const blogApi = baseApi.injectEndpoints({
       query: (arg) => ({
         url: `/update-blog/${arg?._id}`,
         method: "PUT",
+        contentType: "application/json",
         data: arg,
       }),
       invalidatesTags: ["blog"],

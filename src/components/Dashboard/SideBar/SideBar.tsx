@@ -7,13 +7,13 @@ import {
   ListItemIcon,
   ListItemText,
   SvgIconTypeMap,
-  Toolbar,
   Typography,
 } from "@mui/material";
 import React from "react";
 
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import WebIcon from "@mui/icons-material/Web";
+import DownhillSkiingIcon from "@mui/icons-material/DownhillSkiing";
+import PostAddIcon from "@mui/icons-material/PostAdd";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import Link from "next/link";
 
@@ -31,17 +31,17 @@ sidebarItem.push(
   {
     title: "Add Project",
     path: `/dashboard/project`,
-    icon: InboxIcon,
+    icon: WebIcon,
   },
   {
     title: "Add Skill",
     path: `/dashboard/skill`,
-    icon: InboxIcon,
+    icon: DownhillSkiingIcon,
   },
   {
     title: "Add Blog",
     path: `/dashboard/blog`,
-    icon: InboxIcon,
+    icon: PostAddIcon,
   }
 );
 const SideBar = () => {

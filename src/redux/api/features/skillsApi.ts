@@ -31,6 +31,7 @@ const skillApi = baseApi.injectEndpoints({
       query: (arg) => ({
         url: `/update-skill/${arg?._id}`,
         method: "PUT",
+        contentType: "application/json",
         data: arg,
       }),
       invalidatesTags: ["skill"],

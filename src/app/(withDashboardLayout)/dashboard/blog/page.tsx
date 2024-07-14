@@ -10,7 +10,6 @@ import {
 import { useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "sonner";
 
 import DashboardBanner from "@/components/Dashboard/DashboardBanner/DashboardBanner";
@@ -20,13 +19,9 @@ import {
   useGetAllBlogQuery,
 } from "@/redux/api/features/blogApi";
 import CreateBlogModal from "./components/CreateBlogModal";
-import UpdateBlogPage from "./components/UpdateBlog";
 
 const BlogManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
-
-  const [selectedBlog, setSelectedBlog] = useState<any>(null);
 
   const { data, isLoading } = useGetAllBlogQuery({});
   const [deleteBlog] = useDeleteBlogMutation();
@@ -51,17 +46,12 @@ const BlogManagement = () => {
     }
   };
 
-  const handleUpdateRow = (row: any) => {
-    setSelectedBlog(row);
-    setUpdateModalOpen(true);
-  };
-
   const columns: GridColDef[] = [
-    { field: "title", headerName: "Blot Title", width: 200 },
+    { field: "title", headerName: "Blog Title", width: 400 },
     {
       field: "date",
       headerName: "Date",
-      width: 200,
+      width: 400,
     },
 
     {
@@ -73,22 +63,6 @@ const BlogManagement = () => {
       renderCell: ({ row }) => {
         return (
           <>
-            <IconButton
-              onClick={() => handleUpdateRow(row)}
-              aria-label="update"
-              sx={{
-                backgroundColor: "primary.main",
-                ":hover": {
-                  backgroundColor: "secondary.main",
-                },
-              }}
-            >
-              <EditIcon
-                sx={{
-                  color: "white",
-                }}
-              />
-            </IconButton>
             <IconButton
               onClick={() => handleDeletRow(row._id)}
               aria-label="delete"
@@ -118,7 +92,7 @@ const BlogManagement = () => {
         {!isLoading ? (
           <Box>
             <DashboardBanner
-              title="Manage Your Blog By Updating & Deleting"
+              title="Manage Your Blog By Creating & Deleting"
               selfName="Manage Blog"
             />
             <Stack
@@ -152,7 +126,12 @@ const BlogManagement = () => {
 
       <Box mt={2}>
         {!isLoading ? (
-          <DataGrid rows={rowData} columns={columns} hideFooter />
+          <DataGrid
+            sx={{ width: "1000px" }}
+            rows={rowData}
+            columns={columns}
+            hideFooter
+          />
         ) : (
           <Box>
             {forLoading.map((item: number) => {
@@ -176,14 +155,6 @@ const BlogManagement = () => {
           </Box>
         )}
       </Box>
-      {selectedBlog && (
-        <UpdateBlogPage
-          open={updateModalOpen}
-          setOpen={setUpdateModalOpen}
-          _id={selectedBlog?._id}
-          defaultValue={selectedBlog}
-        />
-      )}
     </Box>
   );
 };

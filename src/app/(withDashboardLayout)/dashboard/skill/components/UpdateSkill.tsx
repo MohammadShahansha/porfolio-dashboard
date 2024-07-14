@@ -27,7 +27,7 @@ const UpdateSkilPage = ({ open, setOpen, _id, defaultValue }: TProps) => {
     console.log(values, _id);
     try {
       const res = await updateSkill({ ...values, _id }).unwrap();
-      console.log(res);
+      console.log(res?.data);
       if (res?.data?._id) {
         toast.success("Skill updated successfully");
         setOpen(false);

@@ -26,20 +26,6 @@ type TProps = {
 };
 const UpdateProject = ({ open, setOpen, _id, defaultValue }: TProps) => {
   const [updateProject] = useUpdateProjectMutation();
-  const router = useRouter();
-  // const handleUpdateProject = (values: FieldValues) => {
-  //   fetch(`http://localhost:5000/api/update-project/${values?._id}`, {
-  //     method: "PATCH",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       if (data?.modifiedCount) {
-  //         router.refresh();
-  //         toast.success("Project update successfully");
-  //       }
-  //     });
-  // };
 
   const handleUpdateProject = async (values: FieldValues) => {
     console.log(values, _id);

@@ -5,20 +5,32 @@ import { useCreateBlogMutation } from "@/redux/api/features/blogApi";
 import { Box, Button, Grid } from "@mui/material";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
+import JoditEditor from "jodit-react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { useRef, useState } from "react";
+import sanitizeHtml from "sanitize-html";
 
 type TProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
 const CreateBlogModal = ({ open, setOpen }: TProps) => {
+  //for jodit editor
+  // const editor = useRef(null);
+  const [content, setContent] = useState("");
+
   const [createBlog] = useCreateBlogMutation();
+
   const handleCreateBlog = async (values: FieldValues) => {
     console.log(values);
+    const blogData = { ...values, description: content };
     try {
-      const res = await createBlog(values).unwrap();
+      const res = await createBlog(blogData).unwrap();
       console.log(res);
       if (res?.data?._id) {
-        toast.success("Skill created successfully");
+        toast.success("Skill Created Successfully");
         setOpen(false);
       }
     } catch (err) {
@@ -32,15 +44,15 @@ const CreateBlogModal = ({ open, setOpen }: TProps) => {
           <Grid item sm={12} md={12}>
             <PInput name="title" label="Title" fullWidth={true} />
           </Grid>
-          <Grid item sm={12} md={12}>
-            <PInput name="image" label="Image" fullWidth={true} />
-          </Grid>
-          <Grid item sm={12} md={12}>
-            <PInput name="description" label="Description" fullWidth={true} />
-          </Grid>
 
           <Grid item sm={12} md={12}>
-            <PInput name="date" label="MM/Day/YYYY" fullWidth={true} />
+            {/* <PInput name="description" label="Description" fullWidth={true} /> */}
+            <ReactQuill
+              // ref={editor}
+              value={content}
+              onChange={(newContent) => setContent(newContent)}
+            />
+            <input type="hidden" name="description" value={content} />
           </Grid>
         </Grid>
         <Box

@@ -31,6 +31,7 @@ const projectApi = baseApi.injectEndpoints({
       query: (arg) => ({
         url: `/update-project/${arg?._id}`,
         method: "PUT",
+        contentType: "application/json",
         data: arg,
       }),
       invalidatesTags: ["project"],
