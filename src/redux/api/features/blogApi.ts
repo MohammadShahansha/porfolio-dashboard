@@ -36,20 +36,6 @@ const blogApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["blog"],
     }),
-    // getSinglePets: build.query({
-    //   query: (arg) => ({
-    //     url: `/pets/${arg?.id}`,
-    //     method: "GET",
-    //   }),
-    //   providesTags: ["pets"],
-    // }),
-    // availabelPets: build.query({
-    //   query: () => ({
-    //     url: "/availavle-pets",
-    //     method: "GET",
-    //   }),
-    //   providesTags: ["pets"],
-    // }),
   }),
 });
 

@@ -18,7 +18,13 @@ import {
   useDeleteBlogMutation,
   useGetAllBlogQuery,
 } from "@/redux/api/features/blogApi";
-import CreateBlogModal from "./components/CreateBlogModal";
+// import CreateBlogModal from "./components/CreateBlogModal";
+
+import dynamic from "next/dynamic";
+
+const CreateBlogModal = dynamic(() => import("./components/CreateBlogModal"), {
+  ssr: false,
+});
 
 const BlogManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
